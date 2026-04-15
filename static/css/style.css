@@ -1,0 +1,311 @@
+/* IBM Light Blue Theme */
+:root {
+    --ibm-blue: #0f62fe;
+    --ibm-light-blue: #4589ff;
+    --ibm-lighter-blue: #78a9ff;
+    --ibm-lightest-blue: #d0e2ff;
+    --ibm-dark-blue: #002d9c;
+    --ibm-gray: #f4f4f4;
+    --ibm-dark-gray: #525252;
+    --ibm-white: #ffffff;
+    --ibm-text: #161616;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+    background-color: var(--ibm-gray);
+    color: var(--ibm-text);
+    line-height: 1.6;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: linear-gradient(135deg, var(--ibm-blue) 0%, var(--ibm-light-blue) 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--ibm-white) !important;
+}
+
+.navbar-nav .nav-link {
+    color: var(--ibm-white) !important;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin: 0 10px;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--ibm-lightest-blue) !important;
+    transform: translateY(-2px);
+}
+
+/* Main Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--ibm-blue) 0%, var(--ibm-light-blue) 100%);
+    color: var(--ibm-white);
+    padding: 80px 20px;
+    text-align: center;
+    border-radius: 10px;
+    margin: 30px 0;
+    box-shadow: 0 4px 20px rgba(15, 98, 254, 0.3);
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-section p {
+    font-size: 1.3rem;
+    opacity: 0.95;
+}
+
+/* Card Styles */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(15, 98, 254, 0.2);
+}
+
+.card-header {
+    background: linear-gradient(135deg, var(--ibm-blue) 0%, var(--ibm-light-blue) 100%);
+    color: var(--ibm-white);
+    font-weight: 600;
+    font-size: 1.3rem;
+    padding: 20px;
+    border: none;
+}
+
+.card-body {
+    padding: 25px;
+    background-color: var(--ibm-white);
+}
+
+.card-title {
+    color: var(--ibm-blue);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    color: var(--ibm-dark-gray);
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--ibm-blue) 0%, var(--ibm-light-blue) 100%);
+    border: none;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--ibm-dark-blue) 0%, var(--ibm-blue) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(15, 98, 254, 0.3);
+}
+
+.btn-secondary {
+    background-color: var(--ibm-dark-gray);
+    border: none;
+    padding: 12px 30px;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--ibm-text);
+    transform: translateY(-2px);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+/* Stats Cards */
+.stat-card {
+    background: var(--ibm-white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(15, 98, 254, 0.2);
+}
+
+.stat-card h3 {
+    color: var(--ibm-blue);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    color: var(--ibm-dark-gray);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Chart Container */
+.chart-container {
+    background: var(--ibm-white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--ibm-text);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-control, .form-select {
+    border: 2px solid var(--ibm-lightest-blue);
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--ibm-blue);
+    box-shadow: 0 0 0 0.2rem rgba(15, 98, 254, 0.25);
+    outline: none;
+}
+
+/* Table Styles */
+.table {
+    background: var(--ibm-white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.table thead {
+    background: linear-gradient(135deg, var(--ibm-blue) 0%, var(--ibm-light-blue) 100%);
+    color: var(--ibm-white);
+}
+
+.table thead th {
+    font-weight: 600;
+    padding: 15px;
+    border: none;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background-color: var(--ibm-lightest-blue);
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--ibm-gray);
+}
+
+/* Alert Styles */
+.alert {
+    border-radius: 5px;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border: none;
+}
+
+.alert-info {
+    background-color: var(--ibm-lightest-blue);
+    color: var(--ibm-dark-blue);
+}
+
+.alert-success {
+    background-color: #d1f4d1;
+    color: #0f6e0f;
+}
+
+/* Footer */
+.footer {
+    background: linear-gradient(135deg, var(--ibm-blue) 0%, var(--ibm-light-blue) 100%);
+    color: var(--ibm-white);
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 50px;
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 4px solid var(--ibm-lightest-blue);
+    border-top: 4px solid var(--ibm-blue);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-section p {
+        font-size: 1rem;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Made with Bob */

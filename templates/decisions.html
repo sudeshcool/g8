@@ -1,0 +1,244 @@
+{% extends "base.html" %}
+
+{% block title %}Decision Logic Tool{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="hero-section">
+        <h1>Decision Logic Tool</h1>
+        <p>Interactive evaluation and scoring system</p>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Input Form -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Evaluation Criteria Input</h4>
+                </div>
+                <div class="card-body">
+                    <form id="decision-form" method="POST">
+                        <!-- Location -->
+                        <div class="form-group mb-3">
+                            <label class="form-label"><strong>1. Location (Weight: 20%)</strong></label>
+                            <select class="form-select" name="location" required>
+                                <option value="">Select proximity to clients...</option>
+                                <option value="10">Within 5 mins drive to at least 8 Top Clients (10 points)</option>
+                                <option value="0">More than 5 mins drive from at least 8 Top Clients (0 points)</option>
+                            </select>
+                        </div>
+
+                        <!-- Amenities Within Building -->
+                        <div class="form-group mb-3">
+                            <label class="form-label"><strong>2. Amenities Within Building (Weight: 15%)</strong></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenity_eot" value="2" id="eot">
+                                <label class="form-check-label" for="eot">End of Trip Facilities (2 points)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenity_wellness" value="2" id="wellness">
+                                <label class="form-check-label" for="wellness">Wellness Rooms (2 points)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenity_prayer" value="2" id="prayer">
+                                <label class="form-check-label" for="prayer">Prayer Rooms (2 points)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenity_meeting" value="2" id="meeting">
+                                <label class="form-check-label" for="meeting">Meeting Rooms/Event Spaces (2 points)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="amenity_coworking" value="2" id="coworking">
+                                <label class="form-check-label" for="coworking">Co-working Facilities (2 points)</label>
+                            </div>
+                        </div>
+
+                        <!-- Amenities in Vicinity -->
+                        <div class="form-group mb-3">
+                            <label class="form-label"><strong>3. Amenities in Vicinity (Weight: 15%)</strong></label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="vicinity_fnb" value="2" id="fnb">
+                                <label class="form-check-label" for="fnb">F&B Outlets (2 points)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="vicinity_retail" value="2" id="retail">
+                                <label class="form-check-label" for="retail">Retail Outlets (2 points)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="vicinity_gym" value="2" id="gym">
+                                <label class="form-check-label" for="gym">Gym (2 points)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="vicinity_bank" value="2" id="bank">
+                                <label class="form-check-label" for="bank">Bank (2 points)</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="vicinity_childcare" value="2" id="childcare">
+                                <label class="form-check-label" for="childcare">Childcare Centre (2 points)</label>
+                            </div>
+                        </div>
+
+                        <!-- Public Transport -->
+                        <div class="form-group mb-3">
+                            <label class="form-label"><strong>4. Accessibility to Public Transport (Weight: 15%)</strong></label>
+                            <select class="form-select" name="transport" required>
+                                <option value="">Select accessibility...</option>
+                                <option value="10">Fully Sheltered and within 5 min walk (10 points)</option>
+                                <option value="8">Fully Sheltered more than 5 mins walk (8 points)</option>
+                                <option value="6">Unsheltered within 5 min walk (6 points)</option>
+                                <option value="4">Unsheltered more than 5 min walk (4 points)</option>
+                                <option value="2">More than 10 mins walk (2 points)</option>
+                            </select>
+                        </div>
+
+                        <!-- Building Size -->
+                        <div class="form-group mb-3">
+                            <label class="form-label"><strong>5. Building Size (Weight: 10%)</strong></label>
+                            <input type="number" class="form-control" name="building_size" placeholder="Enter size in sq ft" required>
+                        </div>
+
+                        <!-- Rental Cost -->
+                        <div class="form-group mb-3">
+                            <label class="form-label"><strong>6. Rental Cost per sq ft (Weight: 15%)</strong></label>
+                            <input type="number" step="0.01" class="form-control" name="rental_cost" placeholder="Enter cost per sq ft" required>
+                        </div>
+
+                        <!-- Lease Term -->
+                        <div class="form-group mb-3">
+                            <label class="form-label"><strong>7. Lease Term Flexibility (Weight: 10%)</strong></label>
+                            <select class="form-select" name="lease_term" required>
+                                <option value="">Select lease term...</option>
+                                <option value="10">Flexible (1-2 years) (10 points)</option>
+                                <option value="7">Medium (3-5 years) (7 points)</option>
+                                <option value="4">Long term (5+ years) (4 points)</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Calculate Score</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Evaluation Results</h4>
+                </div>
+                <div class="card-body">
+                    {% if result %}
+                    <div class="alert alert-success">
+                        <h3 class="text-center mb-4">Total Score: {{ result.total_score }}/100</h3>
+                    </div>
+
+                    <div class="chart-container mb-4">
+                        <div id="score-chart"></div>
+                    </div>
+
+                    <h5 class="mb-3">Score Breakdown:</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Criteria</th>
+                                <th>Weight</th>
+                                <th>Raw Score</th>
+                                <th>Weighted Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in result.breakdown %}
+                            <tr>
+                                <td>{{ item.criteria }}</td>
+                                <td>{{ item.weight }}%</td>
+                                <td>{{ item.raw_score }}</td>
+                                <td><strong>{{ item.weighted_score }}</strong></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="mt-4">
+                        <h5>Recommendation:</h5>
+                        <div class="alert {% if result.total_score >= 70 %}alert-success{% elif result.total_score >= 50 %}alert-info{% else %}alert-warning{% endif %}">
+                            {% if result.total_score >= 70 %}
+                            <strong>Excellent Choice!</strong> This location scores very high across all criteria.
+                            {% elif result.total_score >= 50 %}
+                            <strong>Good Option.</strong> This location meets most requirements adequately.
+                            {% else %}
+                            <strong>Consider Alternatives.</strong> This location may not meet all key requirements.
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="text-center py-5">
+                        <h5 class="text-muted">Fill out the form to see results</h5>
+                        <p class="text-muted">Enter your evaluation criteria on the left to calculate the total score and see detailed breakdown.</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Criteria Reference -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Evaluation Criteria Reference</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Location:</strong> Proximity to top clients (20%)</li>
+                        <li class="list-group-item"><strong>Building Amenities:</strong> Facilities within building (15%)</li>
+                        <li class="list-group-item"><strong>Vicinity Amenities:</strong> Nearby services (15%)</li>
+                        <li class="list-group-item"><strong>Transport:</strong> MRT accessibility (15%)</li>
+                        <li class="list-group-item"><strong>Size:</strong> Building square footage (10%)</li>
+                        <li class="list-group-item"><strong>Cost:</strong> Rental per sq ft (15%)</li>
+                        <li class="list-group-item"><strong>Lease:</strong> Term flexibility (10%)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+{% if result %}
+<script>
+    // Create gauge chart for total score
+    var data = [{
+        type: "indicator",
+        mode: "gauge+number+delta",
+        value: {{ result.total_score }},
+        title: { text: "Overall Score", font: { size: 24 } },
+        delta: { reference: 70, increasing: { color: "#0f62fe" } },
+        gauge: {
+            axis: { range: [null, 100], tickwidth: 1, tickcolor: "#0f62fe" },
+            bar: { color: "#0f62fe" },
+            bgcolor: "white",
+            borderwidth: 2,
+            bordercolor: "#d0e2ff",
+            steps: [
+                { range: [0, 50], color: "#ffcccb" },
+                { range: [50, 70], color: "#ffffcc" },
+                { range: [70, 100], color: "#d1f4d1" }
+            ],
+            threshold: {
+                line: { color: "#002d9c", width: 4 },
+                thickness: 0.75,
+                value: 70
+            }
+        }
+    }];
+
+    var layout = {
+        width: 500,
+        height: 400,
+        margin: { t: 25, r: 25, l: 25, b: 25 },
+        paper_bgcolor: "white",
+        font: { color: "#161616", family: "IBM Plex Sans" }
+    };
+
+    Plotly.newPlot('score-chart', data, layout, {responsive: true});
+</script>
+{% endif %}
+{% endblock %}

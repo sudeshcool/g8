@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% block title %}Service Requests Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="hero-section">
+        <h1>Service Requests Dashboard</h1>
+        <p>Comprehensive analytics for {{ total_records }} service requests</p>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="row mt-4">
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ total_records }}</h3>
+                <p>Total Tickets</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ unique_service_types }}</h3>
+                <p>Service Types</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ unique_statuses }}</h3>
+                <p>Status Types</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ avg_resolution_time }}</h3>
+                <p>Avg Resolution (days)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1: Monthly Trend and Top Service Types -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Monthly Ticket Volume Trend</h4>
+                <div id="monthly-trend-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Top 10 Service Types by Volume</h4>
+                <div id="top-service-types-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2: Resolution Time and Status -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Average Resolution Time by Service Type (Top 10)</h4>
+                <div id="avg-resolution-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Ticket Status Distribution</h4>
+                <div id="status-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 3: Day and Hour Patterns -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Ticket Creation by Day of Week</h4>
+                <div id="day-of-week-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Ticket Creation by Hour of Day</h4>
+                <div id="hour-of-day-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 4: Resolution Distribution and Priority -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Resolution Time Distribution (≤530 days)</h4>
+                <div id="resolution-dist-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Priority Distribution</h4>
+                <div id="priority-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Monthly Trend Chart
+    var monthlyTrendData = {{ monthly_trend_data|safe }};
+    Plotly.newPlot('monthly-trend-chart', monthlyTrendData.data, monthlyTrendData.layout, {responsive: true});
+
+    // Top Service Types Chart
+    var topServiceTypesData = {{ top_service_types_data|safe }};
+    Plotly.newPlot('top-service-types-chart', topServiceTypesData.data, topServiceTypesData.layout, {responsive: true});
+
+    // Average Resolution Chart
+    var avgResolutionData = {{ avg_resolution_data|safe }};
+    Plotly.newPlot('avg-resolution-chart', avgResolutionData.data, avgResolutionData.layout, {responsive: true});
+
+    // Status Chart
+    var statusData = {{ status_data|safe }};
+    Plotly.newPlot('status-chart', statusData.data, statusData.layout, {responsive: true});
+
+    // Day of Week Chart
+    var dayOfWeekData = {{ day_of_week_data|safe }};
+    Plotly.newPlot('day-of-week-chart', dayOfWeekData.data, dayOfWeekData.layout, {responsive: true});
+
+    // Hour of Day Chart
+    var hourOfDayData = {{ hour_of_day_data|safe }};
+    Plotly.newPlot('hour-of-day-chart', hourOfDayData.data, hourOfDayData.layout, {responsive: true});
+
+    // Resolution Distribution Chart
+    var resolutionDistData = {{ resolution_dist_data|safe }};
+    Plotly.newPlot('resolution-dist-chart', resolutionDistData.data, resolutionDistData.layout, {responsive: true});
+
+    // Priority Chart
+    var priorityData = {{ priority_data|safe }};
+    Plotly.newPlot('priority-chart', priorityData.data, priorityData.layout, {responsive: true});
+</script>
+{% endblock %}

@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+
+{% block title %}IBM Data Analytics Dashboard - Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <h1>IBM Data Analytics Dashboard</h1>
+        <p>Comprehensive analytics and insights for CREST workspace data</p>
+    </div>
+
+    <!-- Dashboard Cards -->
+    <div class="row mt-5">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <i class="bi bi-ticket-detailed"></i> Service Requests
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Service Request Analytics</h5>
+                    <p class="card-text">
+                        Comprehensive analytics for service requests with monthly trends, service type analysis,
+                        resolution patterns, and temporal insights.
+                    </p>
+                    <ul class="list-unstyled mb-3">
+                        <li>✓ 16,388+ Service Requests</li>
+                        <li>✓ Monthly Volume Trends</li>
+                        <li>✓ Service Type Analysis</li>
+                        <li>✓ Resolution Time Patterns</li>
+                        <li>✓ Day/Hour Analytics</li>
+                    </ul>
+                    <a href="{{ url_for('service_requests') }}" class="btn btn-primary w-100">
+                        View Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <i class="bi bi-building"></i> Workplace Analytics
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Workplace Facility Analytics</h5>
+                    <p class="card-text">
+                        Unified dashboard for workplace facility tickets including status distributions,
+                        priority analysis, category breakdowns, and monthly trends.
+                    </p>
+                    <ul class="list-unstyled mb-3">
+                        <li>✓ 5,077+ Workplace Tickets</li>
+                        <li>✓ Status & Priority Analysis</li>
+                        <li>✓ Category Distribution</li>
+                        <li>✓ Monthly Trends by Category</li>
+                        <li>✓ Resolution Time Metrics</li>
+                    </ul>
+                    <a href="{{ url_for('workplace_analytics') }}" class="btn btn-primary w-100">
+                        View Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <i class="bi bi-calculator"></i> Decision Logic
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Interactive Decision Tool</h5>
+                    <p class="card-text">
+                        Use our intelligent decision logic tool to input various parameters and 
+                        receive calculated results based on predefined business rules.
+                    </p>
+                    <ul class="list-unstyled mb-3">
+                        <li>✓ Interactive Input Form</li>
+                        <li>✓ Real-time Calculations</li>
+                        <li>✓ Business Rule Engine</li>
+                        <li>✓ Result Visualization</li>
+                    </ul>
+                    <a href="{{ url_for('decisions') }}" class="btn btn-primary w-100">
+                        Launch Tool
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mt-5 mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Platform Features</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center mb-3">
+                            <div class="stat-card">
+                                <h3>📊</h3>
+                                <p><strong>Interactive Charts</strong></p>
+                                <small>Powered by Plotly</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center mb-3">
+                            <div class="stat-card">
+                                <h3>📈</h3>
+                                <p><strong>Real-time Analytics</strong></p>
+                                <small>Live data processing</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center mb-3">
+                            <div class="stat-card">
+                                <h3>🎨</h3>
+                                <p><strong>IBM Design</strong></p>
+                                <small>Consistent UI/UX</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 text-center mb-3">
+                            <div class="stat-card">
+                                <h3>📱</h3>
+                                <p><strong>Responsive</strong></p>
+                                <small>Works on all devices</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-5">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h3>21,465</h3>
+                <p>Total Records</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h3>3</h3>
+                <p>Dashboards</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <h3>100%</h3>
+                <p>Data Coverage</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

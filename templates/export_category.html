@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}Workplace Analytics Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="hero-section">
+        <h1>Workplace Analytics Dashboard</h1>
+        <p>Comprehensive workplace facility analytics for {{ total_records }} tickets</p>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="row mt-4">
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ total_records }}</h3>
+                <p>Total Tickets</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ open_tickets }}</h3>
+                <p>Open/Pending</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ closed_tickets }}</h3>
+                <p>Closed Tickets</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ avg_resolution_days }}</h3>
+                <p>Avg Resolution (days)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1: Geographic and Category Breakdown -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Ticket Volume by Country</h4>
+                <div id="geo-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Category Distribution</h4>
+                <div id="category-breakdown-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2: Status and SLA Performance -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Current Status Overview</h4>
+                <div id="status-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">SLA Performance</h4>
+                <div id="sla-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 3: Monthly Trends -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Monthly Ticket Trends by Category</h4>
+                <div id="time-series-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 4: Resolution Time Analysis -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Resolution Time Distribution by Category</h4>
+                <div id="category-resolution-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 5: Agent Performance -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Agent Group Performance: Workload vs Resolution Time</h4>
+                <div id="agent-performance-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 6: Resolution Heatmap -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Resolution Time Heatmap: Country vs Category</h4>
+                <div id="resolution-heatmap-chart"></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // 1. Geographic Distribution Chart
+    var geoData = {{ geo_data | safe }};
+    Plotly.newPlot('geo-chart', geoData.data, geoData.layout, {responsive: true});
+
+    // 2. Category Breakdown Chart
+    var categoryBreakdownData = {{ category_breakdown_data | safe }};
+    Plotly.newPlot('category-breakdown-chart', categoryBreakdownData.data, categoryBreakdownData.layout, {responsive: true});
+
+    // 3. Status Distribution Chart
+    var statusData = {{ status_data | safe }};
+    Plotly.newPlot('status-chart', statusData.data, statusData.layout, {responsive: true});
+
+    // 4. SLA Performance Chart
+    var slaData = {{ sla_performance_data | safe }};
+    Plotly.newPlot('sla-chart', slaData.data, slaData.layout, {responsive: true});
+
+    // 5. Time Series Chart
+    var timeSeriesData = {{ time_series_data | safe }};
+    Plotly.newPlot('time-series-chart', timeSeriesData.data, timeSeriesData.layout, {responsive: true});
+
+    // 6. Category Resolution Time Chart
+    var categoryResolutionData = {{ category_resolution_data | safe }};
+    Plotly.newPlot('category-resolution-chart', categoryResolutionData.data, categoryResolutionData.layout, {responsive: true});
+
+    // 7. Agent Performance Chart
+    var agentPerformanceData = {{ agent_performance_data | safe }};
+    Plotly.newPlot('agent-performance-chart', agentPerformanceData.data, agentPerformanceData.layout, {responsive: true});
+
+    // 8. Resolution Heatmap Chart
+    var resolutionHeatmapData = {{ resolution_heatmap_data | safe }};
+    Plotly.newPlot('resolution-heatmap-chart', resolutionHeatmapData.data, resolutionHeatmapData.layout, {responsive: true});
+</script>
+{% endblock %}

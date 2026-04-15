@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Crest Workspace SR Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="hero-section">
+        <h1>Crest Workspace SR Dashboard</h1>
+        <p>Comprehensive analytics for {{ total_records }} service requests</p>
+    </div>
+
+    <!-- Summary Statistics -->
+    <div class="row mt-4">
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ total_records }}</h3>
+                <p>Total Requests</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ unique_categories }}</h3>
+                <p>Categories</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ unique_types }}</h3>
+                <p>Service Types</p>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card">
+                <h3>{{ avg_resolution_time }}</h3>
+                <p>Avg Resolution (hrs)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 1 -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Status Distribution</h4>
+                <div id="status-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Priority Distribution</h4>
+                <div id="priority-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 2 -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Top 10 Service Items</h4>
+                <div id="service-items-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row 3 -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Category Distribution</h4>
+                <div id="category-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Ticket Type Distribution</h4>
+                <div id="ticket-type-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Time Series Chart -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="chart-container">
+                <h4 class="mb-3">Requests Over Time</h4>
+                <div id="time-series-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="row">
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Recent Service Requests</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Service Item</th>
+                                    <th>Status</th>
+                                    <th>Priority</th>
+                                    <th>Category</th>
+                                    <th>Created Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for row in recent_data %}
+                                <tr>
+                                    <td>{{ row['ID'] }}</td>
+                                    <td>{{ row['Service Item'] }}</td>
+                                    <td><span class="badge bg-info">{{ row['Status'] }}</span></td>
+                                    <td><span class="badge bg-warning">{{ row['Priority'] }}</span></td>
+                                    <td>{{ row['Category'] }}</td>
+                                    <td>{{ row['Created Date'] }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Status Distribution Chart
+    var statusData = {{ status_data | safe }};
+    Plotly.newPlot('status-chart', statusData.data, statusData.layout, {responsive: true});
+
+    // Priority Distribution Chart
+    var priorityData = {{ priority_data | safe }};
+    Plotly.newPlot('priority-chart', priorityData.data, priorityData.layout, {responsive: true});
+
+    // Service Items Chart
+    var serviceItemsData = {{ service_items_data | safe }};
+    Plotly.newPlot('service-items-chart', serviceItemsData.data, serviceItemsData.layout, {responsive: true});
+
+    // Category Chart
+    var categoryData = {{ category_data | safe }};
+    Plotly.newPlot('category-chart', categoryData.data, categoryData.layout, {responsive: true});
+
+    // Ticket Type Chart
+    var ticketTypeData = {{ ticket_type_data | safe }};
+    Plotly.newPlot('ticket-type-chart', ticketTypeData.data, ticketTypeData.layout, {responsive: true});
+
+    // Time Series Chart
+    var timeSeriesData = {{ time_series_data | safe }};
+    Plotly.newPlot('time-series-chart', timeSeriesData.data, timeSeriesData.layout, {responsive: true});
+</script>
+{% endblock %}
